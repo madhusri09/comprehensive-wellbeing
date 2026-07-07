@@ -1,0 +1,41 @@
+def predict_hdi(life_expectancy, mean_schooling, expected_schooling, gni):
+    life_score = life_expectancy / 85
+    mean_score = mean_schooling / 15
+    expected_score = expected_schooling / 18
+    income_score = gni / 75000
+    hdi = (
+        life_score * 0.30 +
+        mean_score * 0.25 +
+        expected_score * 0.20 +
+        income_score * 0.25
+    )
+
+    if hdi >= 0.80:
+        category = "Very High Human Development"
+    elif hdi >= 0.70:
+        category = "High Human Development"
+    elif hdi >= 0.55:
+        category = "Medium Human Development"
+    else:
+        category = "Low Human Development"
+    return hdi, category
+print("="*50)
+print(" HUMAN DEVELOPMENT INDEX (HDI) PREDICTION ")
+print("="*50)
+country = input("Enter Country Name: ")
+life_expectancy = float(input("Life Expectancy (Years): "))
+mean_schooling = float(input("Mean Years of Schooling: "))
+expected_schooling = float(input("Expected Years of Schooling: "))
+gni = float(input("Gross National Income Per Capita (PPP US$): "))
+score, category = predict_hdi(
+    life_expectancy,
+    mean_schooling,
+    expected_schooling,
+    gni
+)
+
+print("\n==============================")
+print("Country :", country)
+print("HDI Score :", round(score,3))
+print("Category :", category)
+print("==============================")
